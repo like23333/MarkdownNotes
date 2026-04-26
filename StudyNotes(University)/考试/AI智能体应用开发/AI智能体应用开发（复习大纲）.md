@@ -145,7 +145,7 @@
 4）信息返回类型为 message；
 5）判断能够正常返回结果后再进行图片保存；
 
------ Python 代码开始 -----
+```python
 load_dotenv("system.env")
 
 @generate.post("/generate")
@@ -183,8 +183,7 @@ def generate_image(data: dict=Body()):
         "img_url": f"/static/images/{filename}", 
         "all_imgs": fils
     }
------ Python 代码结束 -----
-
+```
 
 ### 2. 基于 function_calling 技术进行大模型的调用；
 1）创建一个大模型会话；
@@ -193,7 +192,7 @@ def generate_image(data: dict=Body()):
 4）获取大模型分析后需要调用的方法名称；
 5）进行方法调用并传入参数；
 
------ Python 代码开始 -----
+```python
 def send_message(message):
     client = OpenAI(api_key=os.getenv("DEEPSEEK_KEY"), 
                     base_url="https://api.deepseek.com")
@@ -223,8 +222,7 @@ def invoke(content):
             {"role": "user", "content": f"请基于该信息:{func_response}\n 来回答以下问题：\n{content}"}
         ]
         send_message(messages)
------ Python 代码结束 -----
-
+```
 
 ### 3. 基于 FastAPI 框架 + 阿里百炼平台，构建识别图片内容的功能。
 1）通过 post 方式访问该接口，访问地址为 /logic/pic/recognize；
@@ -233,7 +231,7 @@ def invoke(content):
 4）设置传递给大模型的图片格式及内容；
 5）判定是否返回了正常的内容；
 
------ Python 代码开始 -----
+```python
 recog = APIRouter()
 
 # 图像识别通常为单次对话，可以不保存历史记录
@@ -269,8 +267,7 @@ def recognize_image(data: dict=Body()):
                 
     # 以流式响应的方式响应给前端
     return StreamingResponse(stream_chat(), media_type="text/event-stream")
------ Python 代码结束 -----
-
+```
 
 ### 4. 通过链接获取新浪内容，并调用 DeepSeek 生成内容概述；
 1）获取当前日期，并按照“四位年-二位月-二位日 小时：分：秒”进行格式化；
@@ -279,7 +276,7 @@ def recognize_image(data: dict=Body()):
 4）停止 2 秒，防止访问过快触发反爬虫机制；
 5）启动事务，实际写入；
 
------ Python 代码开始 -----
+```python
 def get_and_update():
     with Session(engine) as session:
         today = time.strftime("%Y-%m-%d 00:00:00")
@@ -296,4 +293,5 @@ def get_and_update():
             session.execute(sql)
             session.commit()
             print(f"更新摘要成功，ID：{row['id']}")
------ Python 代码结束 -----
+
+```
