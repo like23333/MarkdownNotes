@@ -111,7 +111,7 @@
 *【手写笔记：条件构造器有4个；防止字段写错或编码，避免字符串拼写错误】*
 55. **QueryWrapper / LambdaQueryWrapper**：用于构建查询条件，支持链式调用和丰富的条件方法。*【手写笔记：无需手写SQL】*
 56. **UpdateWrapper / LambdaUpdateWrapper**：用于构建更新条件，支持链式调用和动态更新。
-57. **条件方法**：包括 eq、ne、gt、lt、ge、le、like、between 等，用于构建各种查询条件。
+57. **条件方法**：包括 eq（**E**qual）、ne（**N**ot **E**qual）、gt（**G**reater **T**han）、lt（**L**ess **T**han）、ge（**G**reater than or **E**qual to）、le（**L**ess than or **E**qual to）、like、between 等，用于构建各种查询条件。
 58. **嵌套条件**：通过 and、or 等方法构建嵌套条件，实现复杂的查询逻辑。
 59. **函数调用**：在条件构造器中调用数据库函数，如 `apply("date_format({0},'%Y-%m-%d') = {1}", column, dateStr)`，实现灵活的查询。
 *【手写笔记补充：MyBatis 的性能插件，分页插件，防全表更新插件(不全，见笔记)，数据权限插件、字段自动填充插件、逻辑删除插件、多租户动态表名插件、数据脱敏插件】*
